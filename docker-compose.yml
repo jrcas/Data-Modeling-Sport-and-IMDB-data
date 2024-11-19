@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:14
+    restart: on-failure
+    container_name: ${DOCKER_CONTAINER} 
+    env_file:
+      - path: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
+    ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}" 
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
